@@ -1,24 +1,29 @@
-import logo from './logo.svg';
+import { useState } from 'react';
 import './App.css';
 
 function App() {
+  const [price, setPrice] = useState(0.0)
+
+  const formatingPrice = () => {
+    if(price.toString().includes('.')){
+      return price
+    }
+    else{
+      return `${price}.00`
+    }
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="wrapper">
+    <div className="amount">
+      <sup>$</sup>
+      <span className="dollars">{formatingPrice()}</span>
     </div>
+    <input value={price} type="range" id="priceRange" min="0.0" max="100" step="0.01" onChange={(e)=> setPrice(e.target.value)} />
+    <br />
+    <button>Buy Now</button>
+    <script src="app.js"></script>
+  </div>
   );
 }
 
